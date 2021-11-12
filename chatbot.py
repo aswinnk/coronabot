@@ -19,18 +19,13 @@ chatbot = ChatBot(
     database_uri='sqlite:///database.sqlite3'
 ) 
  # Training with Personal Ques & Ans 
-conversation = [
-    "Hello",
-    "Hi there!",
-    "How are you doing?",
-    "I'm doing great.",
-    "That is good to hear",
-    "Thank you.",
-    "You're welcome."
-]
+training_data_quesans = open('training_data/ques_ans.txt').read().splitlines()
+training_data_personal = open('training_data/personal_ques.txt').read().splitlines()
+
+training_data = training_data_quesans + training_data_personal
 
 trainer = ListTrainer(chatbot)
-trainer.train(conversation)
+trainer.train(training_data)  
 
 # Training with English Corpus Data 
 trainer_corpus = ChatterBotCorpusTrainer(chatbot)
